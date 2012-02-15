@@ -2,16 +2,17 @@
 <html>
 	<head>
 		<title>{% if title %}{{ title }} - {% endif %}Luke &amp; Meagan</title>
-		<link rel="stylesheet" href="/css/global.sass" />
+		<link rel="stylesheet" href="{{ STATIC_URL }}css/global.css" />
 		{% block media %}
 		{% endblock %}
 	</head>
 	<body>
 		<header>
 			<!-- randomly selected image here -->
+			foo bar baz
 		</header>
 		<nav>
-			<a href="/">L &amp; M</a>
+			<a href="/"><img src="{{ STATIC_URL }}img/logo-sm.png" /></a>
 			<a href="">Information</a>
 			<a href="">RSVP</a>
 			<a href="">Photos</a>

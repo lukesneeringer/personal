@@ -1,0 +1,55 @@
+/* sweeping things */
+* {
+    box-sizing: border-box;
+    margin: 0px;
+    padding: 0px;
+}
+
+a {
+    text-decoration: none;
+}
+
+body {
+    font-family: Arial;
+    margin: 0px;
+    padding: 0px;
+}
+
+/* header */
+header {
+    border: 1px solid green;
+    display: block;
+    height: 100px;
+    position: fixed;
+    width: 100%;
+}
+
+/* nav */
+nav {
+    bottom: 0px;
+    position: fixed;
+    top: 100px;
+    width: 150px;
+}
+
+nav a:first-child {
+    height: 75px;
+    padding-top: 0px;
+}
+
+nav a {
+    background-color: #d0ffff;
+    color: black;
+    display: block;
+    font-size: 12px;
+    font-weight: bold;
+    height: 40px;
+    letter-spacing: 1px;
+    padding-top: 15px;
+    text-align: center;
+    width: 200px;
+}
+
+nav a:hover {
+    background-color: #c0ffff;
+}
