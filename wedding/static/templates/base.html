@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+	<head>
+		<title>{% if title %}{{ title }} - {% endif %}Luke &amp; Meagan</title>
+		<link rel="stylesheet" href="/css/global.sass" />
+		{% block media %}
+		{% endblock %}
+	</head>
+	<body>
+		<header>
+			<!-- randomly selected image here -->
+		</header>
+		<nav>
+			<a href="/">L &amp; M</a>
+			<a href="">Information</a>
+			<a href="">RSVP</a>
+			<a href="">Photos</a>
+		</nav>
+		<div id="content">
+			<h1>{% if title -%}{{ title }}{% else %}Luke &amp; Meagan{% endif %}</h1>
+			
+			{% block content %}
+			{% endblock %}
+		</div>
+		<footer>
+			<p>&copy; 2012, Luke Sneeringer &amp; Meagan McClellan</p>
+		</footer>
+	</body>
+</html>
