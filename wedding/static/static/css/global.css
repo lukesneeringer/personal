@@ -10,6 +10,9 @@ a {
 }
 
 body {
+    background-image: url('/static/img/background.png');
+    background-position: 0px 100px;
+    background-repeat: no-repeat;
     font-family: Arial;
     margin: 0px;
     padding: 0px;
@@ -29,7 +32,7 @@ nav {
     bottom: 0px;
     position: fixed;
     top: 100px;
-    width: 150px;
+    width: 200px;
 }
 
 nav a:first-child {
@@ -38,9 +41,9 @@ nav a:first-child {
 }
 
 nav a {
-    background-color: #d0ffff;
-    color: black;
+    color: #606060;
     display: block;
+    font-family: Georgia;
     font-size: 12px;
     font-weight: bold;
     height: 40px;
@@ -50,6 +53,7 @@ nav a {
     width: 200px;
 }
 
-nav a:hover {
-    background-color: #c0ffff;
+nav a:hover, nav a:active {
+    background-image: url('/static/img/nav-highlight.png');
+    background-repeat: repeat-y;
 }
