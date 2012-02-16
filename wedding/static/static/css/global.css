@@ -10,17 +10,20 @@ a {
 }
 
 body {
+    background-attachment: fixed;
+    background-color: #fdfefd;
     background-image: url('/static/img/background.png');
-    background-position: 0px 100px;
+    background-position: center 100px;
     background-repeat: no-repeat;
     font-family: Arial;
-    margin: 0px;
+    margin-left: auto;
+    margin-right: auto;
     padding: 0px;
+    width: 980px;
 }
 
 /* header */
 header {
-    border: 1px solid green;
     display: block;
     height: 100px;
     position: fixed;
@@ -48,7 +51,7 @@ nav a {
     font-weight: bold;
     height: 40px;
     letter-spacing: 1px;
-    padding-top: 15px;
+    padding-top: 12px;
     text-align: center;
     width: 200px;
 }
@@ -56,4 +59,42 @@ nav a {
 nav a:hover, nav a:active {
     background-image: url('/static/img/nav-highlight.png');
     background-repeat: repeat-y;
+}
+
+/* content box */
+#content {
+    display: block;
+    font-family: Georgia;
+    margin-top: 116px;
+    margin-left: 220px;
+    position: relative;
+    width: 760px;
+}
+
+#content > h1 {
+    font-style: italic;
+}
+
+#content p {
+    line-height: 150%;
+    margin-top: 12px;
+    margin-bottom: 12px;
+}
+
+/* home page */
+#invitation {
+    margin-right: 48px;
+    padding-top: 48px;
+    text-align: center;
+}
+
+/* footer */
+footer {
+    clear: both;
+    color: #808080;
+    font-family: Tahoma, Arial, Sans-Serif;
+    font-size: 10px;
+    padding-right: 12px;
+    padding-top: 12px;
+    text-align: right;
 }

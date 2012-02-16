@@ -9,7 +9,6 @@
 	<body>
 		<header>
 			<!-- randomly selected image here -->
-			foo bar baz
 		</header>
 		<nav>
 			<a href="/"><img src="{{ STATIC_URL }}img/logo-sm.png" /></a>
@@ -21,13 +20,17 @@
 			<a href="">RSVP</a>
 		</nav>
 		<div id="content">
-			<h1>{% if title -%}{{ title }}{% else %}Luke &amp; Meagan{% endif %}</h1>
+		    {% if title %}
+		        <h1>{{ title }}</h1>
+		    {% endif %}
 			
 			{% block content %}
 			{% endblock %}
 		</div>
+		<!--
 		<footer>
-			<p>&copy; 2012, Luke Sneeringer &amp; Meagan McClellan</p>
+			<p>&copy; 2012, Luke Sneeringer</p>
 		</footer>
+		-->
 	</body>
 </html>
