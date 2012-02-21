@@ -90,6 +90,11 @@ nav a:hover, nav a:active {
     content: "~ ";
 }
 
+#content p.bible-quote {
+    font-style: italic;
+    text-align: center;
+}
+
 /* home page */
 #invitation {
     margin-right: 48px;
