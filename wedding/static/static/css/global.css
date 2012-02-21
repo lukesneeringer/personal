@@ -13,7 +13,7 @@ body {
     background-attachment: fixed;
     background-color: #fdfefd;
     background-image: url('/static/img/background.png');
-    background-position: center 100px;
+    background-position: center 0px;
     background-repeat: no-repeat;
     font-family: Arial;
     margin-left: auto;
@@ -22,24 +22,16 @@ body {
     width: 980px;
 }
 
-/* header */
-header {
-    display: block;
-    height: 100px;
-    position: fixed;
-    width: 100%;
-}
-
 /* nav */
 nav {
     bottom: 0px;
     position: fixed;
-    top: 100px;
+    top: 60px;
     width: 200px;
 }
 
 nav a:first-child {
-    height: 75px;
+    height: 80px;
     padding-top: 0px;
 }
 
@@ -49,9 +41,9 @@ nav a {
     font-family: Georgia;
     font-size: 12px;
     font-weight: bold;
-    height: 40px;
+    height: 52px;
     letter-spacing: 1px;
-    padding-top: 12px;
+    padding-top: 18px;
     text-align: center;
     width: 200px;
 }
@@ -65,20 +57,37 @@ nav a:hover, nav a:active {
 #content {
     display: block;
     font-family: Georgia;
-    margin-top: 116px;
+    margin-top: 16px;
     margin-left: 220px;
     position: relative;
     width: 760px;
 }
 
 #content > h1 {
-    font-style: italic;
+    font-family: Georgia, Times, Serif;
+    font-size: 24px;
+    letter-spacing: 0.25em;
+    margin-top: 40px;
+    text-align: center;
 }
 
 #content p {
-    line-height: 150%;
+    line-height: 200%;
     margin-top: 12px;
-    margin-bottom: 12px;
+    margin-bottom: 24px;
+}
+
+#content p.byline {
+    font-size: 12px;
+    font-style: italic;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    margin-right: 260px;
+    text-align: right;
+}
+
+#content p.byline:before {
+    content: "~ ";
 }
 
 /* home page */

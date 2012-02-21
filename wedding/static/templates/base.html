@@ -7,13 +7,10 @@
 		{% endblock %}
 	</head>
 	<body>
-		<header>
-			<!-- randomly selected image here -->
-		</header>
 		<nav>
-			<a href="/"><img src="{{ STATIC_URL }}img/logo-sm.png" /></a>
-			<a href="">About Luke</a>
-			<a href="">About Meagan</a>
+			<a href="{{ url('home') }}"><img src="{{ STATIC_URL }}img/logo-sm.png" /></a>
+			<a href="{{ url('info', kwargs={ 'template_name': 'about-luke' }) }}">About Luke</a>
+			<a href="{{ url('info', kwargs={ 'template_name': 'about-meagan' }) }}">About Meagan</a>
 			<a href="">Directions</a>
 			<a href="">Photos</a>
 			<a href="">Registry</a>
