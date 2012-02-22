@@ -19,15 +19,17 @@ body {
     margin-left: auto;
     margin-right: auto;
     padding: 0px;
+    position: relative;
     width: 980px;
 }
 
 /* nav */
 nav {
-    bottom: 0px;
+    display: block;
     position: fixed;
     top: 60px;
     width: 200px;
+    z-index: 5000;
 }
 
 nav a:first-child {
