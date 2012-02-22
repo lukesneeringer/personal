@@ -73,6 +73,13 @@ nav a:hover, nav a:active {
     text-align: center;
 }
 
+#content h2 {
+    font-family: Georgia, Times, Serif;
+    font-size: 16px;
+    margin-top: 24px;
+    text-align: left;
+}
+
 #content p {
     line-height: 200%;
     margin-top: 12px;
@@ -95,6 +102,16 @@ nav a:hover, nav a:active {
 #content p.bible-quote {
     font-style: italic;
     text-align: center;
+}
+
+#content ul {
+    margin-left: 40px;
+    margin-top: 12px;
+}
+
+#content ul li {
+    font-family: Georgia, Times, Serif;
+    line-height: 150%;
 }
 
 /* home page */
