@@ -10,7 +10,7 @@
 		<nav>
 			<a href="{{ url('home') }}"><img src="{{ STATIC_URL }}img/logo-sm.png" /></a>
 			{% for nav_item in nav %}
-			    <a href="{% if nav_item.url %}{{ nav_item.url }}{% else %}{{ url('info', kwargs={ 'template_name': nav_item.area }) }}{% endif %}">{{ nav_item.label }}</a>
+			    <a href="{% if nav_item.url %}{{ nav_item.url }}{% else %}{{ url('info', kwargs={ 'template_name': nav_item.area }) }}{% endif %}"{% if area == nav_item.area %} class="selected"{% endif %}>{{ nav_item.label }}</a>
 			{% endfor %}
 		</nav>
 		<div id="content">
@@ -21,10 +21,10 @@
 			{% block content %}
 			{% endblock %}
 		</div>
-		<!--
 		<footer>
-			<p>&copy; 2012, Luke Sneeringer</p>
-		</footer>
-		-->
+    		{% if not user.is_anonymous() %}
+		        Logged in as <b>{{ user.username }}</b>: {% if user.is_superuser %}<a href="/admin/">Admin</a> | {% endif %}<a href="/logout/">Logout</a>
+    		{% endif %}
+	    </footer>
 	</body>
 </html>

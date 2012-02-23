@@ -14,21 +14,21 @@ def data(request):
             'label': 'About Meagan',
         },
         {
-            'area': 'directions',
-            'label': 'Directions',
+            'area': 'travel',
+            'label': 'Travel Information',
         },
         {
-            'area': 'gifts',
-            'label': 'Gifts',
+            'area': 'rsvp',
+            'label': 'RSVP',
+            'url': reverse('rsvp'),
         },
         {
             'area': 'photos',
             'label': 'Photos',
         },
         {
-            'area': 'rsvp',
-            'label': 'RSVP',
-            'url': reverse('rsvp'),
+            'area': 'gifts',
+            'label': 'Gifts',
         },
     )
     

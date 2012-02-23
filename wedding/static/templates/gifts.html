@@ -1,7 +1,23 @@
 {% extends "base.html" %}
 
+{% block media %}
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/gifts.css" />
+{% endblock %}
+
 {% block content %}
 	<h1>Gifts</h1>
 	
 	<p>The bride and groom are registered at:</p>
+	
+	<a class="registrant" href="http://www.amazon.com/gp/registry/wedding/3JCOMML8MCGM3">
+	    <img src="{{ STATIC_URL }}img/amazon.png" alt="Amazon.com" />
+	</a>
+	
+	<a class="registrant" href="http://www.bedbathandbeyond.com/regGiftRegistry.asp?wrn=-2092718846">
+	    <img src="{{ STATIC_URL }}img/bed-bath-beyond.jpeg" alt="Bed, Bath &amp; Beyond" />
+    </a>
+    
+    <a class="registrant" href="http://www1.macys.com/registry/wedding/guest/?registryId=684711">
+        <img src="{{ STATIC_URL }}img/macys.png" alt="Macy's" />
+    </a>
 {% endblock %}

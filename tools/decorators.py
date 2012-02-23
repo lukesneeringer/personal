@@ -1,3 +1,5 @@
+from django.contrib import admin
+
 def cached_property(method):
     """Decorator that turns a method into a special kind of property;
     it retrieves the data requested by the method, and caches the result
@@ -22,3 +24,13 @@ def cached_property(method):
         self._metadata_cache[method.__name__] = answer
         return self._metadata_cache[method.__name__]
     return property(f)
+    
+    
+def admin_register(model):
+    """Method that returns a decorator that registers the admin class,
+    running it through admin.site.register."""
+    
+    def f(class_):
+        admin.site.register(model, class_)
+        return class_
+    return f

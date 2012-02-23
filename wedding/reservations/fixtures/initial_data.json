@@ -1,0 +1,62 @@
+[
+    {
+        "pk": 1, 
+        "model": "auth.user", 
+        "fields": {
+            "username": "luke", 
+            "first_name": "", 
+            "last_name": "", 
+            "is_active": true, 
+            "is_superuser": true, 
+            "is_staff": true, 
+            "last_login": "2012-02-23 16:24:30", 
+            "groups": [], 
+            "user_permissions": [], 
+            "password": "sha1$ced9d$3f23fc064659a70c704a5669186c14635dca2b45", 
+            "email": "lukesneeringer@gmail.com", 
+            "date_joined": "2012-02-23 16:24:02"
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "reservations.invitation", 
+        "fields": {
+            "city": "Austin", 
+            "created": "2012-02-23 16:24:59", 
+            "modified": "2012-02-23 16:24:59", 
+            "state": "TX", 
+            "user": 1, 
+            "address": "12112 Tanglebriar Trl", 
+            "rehearsal_dinner": false, 
+            "zip_code": "78750"
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "reservations.invitee", 
+        "fields": {
+            "first_name": "Meagan", 
+            "last_name": "McClellan", 
+            "title": "Captain", 
+            "created": "2012-02-23 16:24:59", 
+            "modified": "2012-02-23 16:24:59", 
+            "sex": "female", 
+            "invitation": 1, 
+            "age_group": "adult"
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "reservations.invitee", 
+        "fields": {
+            "first_name": "Luke", 
+            "last_name": "Sneeringer", 
+            "title": "Mr.", 
+            "created": "2012-02-23 16:24:59", 
+            "modified": "2012-02-23 16:24:59", 
+            "sex": "male", 
+            "invitation": 1, 
+            "age_group": "adult"
+        }
+    }
+]

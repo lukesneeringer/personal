@@ -37,6 +37,12 @@ class Invitation(models.Model):
         # and in their entirety
         # (e.g. "Mr. Daniel Beltz and Ms. Jessica Dymer")
         return u'%s & %s' % (self.adults[0], self.adults[1])
+        
+    def __len__(self):
+        return self.invitee_set.count()
+        
+    def __nonzero__(self):
+        return True
     
     @cached_property
     def adults(self):
@@ -50,10 +56,15 @@ class Invitation(models.Model):
     def infants(self):
         return self.invitee_set.filter(age_group='infants')
         
+    @cached_property
+    def rsvps(self):
+        return RSVP.objects.filter(invitee__invitation=self)
+        
     
 class Invitee(models.Model):
     """A specific person invited included on an invitation."""
     
+    invitation = models.ForeignKey(Invitation)
     title = models.CharField(max_length=16)
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
@@ -68,6 +79,9 @@ class Invitee(models.Model):
     ), db_index=True)
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
+    
+    class Meta:
+        ordering = ('age_group', 'sex', 'first_name')
     
     def __unicode__(self):
         return '%s %s %s' % (self.title, self.first_name, self.last_name)
@@ -92,6 +106,9 @@ class RSVP(models.Model):
     ), help_text='The response medium this person used.', default='mail')
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
+    
+    class Meta:
+        verbose_name = 'RSVP'
     
     def __unicode__(self):
         return u'RSVP: %s' % self.invitee

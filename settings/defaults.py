@@ -130,7 +130,7 @@ INSTALLED_APPS = (
     'django.contrib.admindocs',
     
     # wedding app
-    'wedding.rsvp',
+    'wedding.reservations',
     'wedding.static',
 )
 
