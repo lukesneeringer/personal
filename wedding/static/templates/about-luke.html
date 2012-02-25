@@ -1,8 +1,35 @@
 {% extends "base.html" %}
 
+{% block media %}
+    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/about.css" />
+{% endblock %}
+
 {% block content %}
     <h1>About Luke</h1>
     <p class="byline">by Meagan</p>
     
     <p class="bible-quote">"Blessed is the man who walks not in the counsel of the wicked." (Psalm 1:1)</p>
+    
+    <img src="{{ STATIC_URL }}img/luke.jpeg" class="photo" />
+    <p>Luke is a native Texan, born and raised in Austin. In spite of this, he didn’t own a pair of
+        cowboy boots until he met Meagan. (This, perhaps, indicates a crucial difference between Austinites
+        and other Texans.)
+    </p>
+    
+    <p>True to his Texas blood, he graduated from Texas A&amp;M University and went on to work with a
+        series of thoroughly Texan companies, including H-E-B (a Texas grocery chain) and then several
+        programming firms in Austin, currently a startup named FeedMagnet.  All of his jobs incorporated
+        his skill at organization and resource management. They also played to his strength in all
+        things “techy”.  Meagan is really marrying him so that she’ll have life-long tech support.
+    </p>
+    
+    <p>In addition to loving computers (hardware and software, although he’s a Mac loyalist), Luke has
+        a passion for logic and theology.  Although these two interests sound like they would be mutually
+        exclusive, when Luke explains it they are inextricably aligned.  
+    </p>
+    
+    <p>In his day-to-day life, Luke wields Logic like a scythe to cut through the tangles and snares
+        presented by the modern world.  He is also incredibly kind, gentle and genuine, with unmatched
+        problem-solving abilities.  These traits combine to make the perfect life partner.
+    </p>
 {% endblock %}

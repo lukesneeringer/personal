@@ -96,8 +96,11 @@ class Invitee(models.Model):
         return '%s %s %s' % (self.title, self.first_name, self.last_name)
         
     def get_rsvp_form(self, post=None):
-        from wedding.reservations.forms import RSVPForm
+        from wedding.reservations.forms import RSVPForm, InfantRSVPForm
+        if self.age_group == 'infant':
+            return InfantRSVPForm(post, instance=self.reservation, prefix=hash(unicode(self)))
         return RSVPForm(post, instance=self.reservation, prefix=hash(unicode(self)))
+        
         
     @cached_property
     def reservation(self):
@@ -112,7 +115,7 @@ class RSVP(models.Model):
     and their food order."""
     
     invitee = models.OneToOneField(Invitee, related_name='rsvp')
-    accepts = models.BooleanField(default=False, verbose_name='attending', choices=(
+    accepts = models.BooleanField(default=True, verbose_name='attending', choices=(
         (True, 'Accepts'),
         (False, 'Regrets'),
     ))

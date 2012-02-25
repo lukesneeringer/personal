@@ -22,8 +22,19 @@ class RSVPForm(forms.ModelForm):
         
     def clean(self):
         """If an invitee is unable to attend, then clear out their food order."""
-        
         if not bool(self.cleaned_data['accepts']):
             self.cleaned_data['food'] = None
-        return self.cleaned_data
+        return self.cleaned_data        
         
+        
+class InfantRSVPForm(forms.ModelForm):
+    """A form for creating or modifying an RSVP, intended for infants."""
+    
+    error_css_class = 'error'
+    
+    class Meta:
+        fields = ('accepts',)
+        model = RSVP
+        widgets = {
+            'accepts': forms.RadioSelect,
+        }

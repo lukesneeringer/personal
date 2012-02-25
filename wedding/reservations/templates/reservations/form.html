@@ -4,6 +4,8 @@
 
 {% block media %}
     <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/rsvp_form.css" />
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7/jquery.min.js"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}js/rsvp_form.js"></script>
 {% endblock %}
 
 {% block content %}
@@ -13,9 +15,8 @@
 
 <p>We will be serving a full meal (at no cost to our guests, of course) at the
     reception, around 2:00 PM. We are offering chicken, fish, and steak
-    entre&eacute;s. Additionally, the caterer offers a limited number of vegetarian
-    or gluten free alternatives if needed. <a href="/rsvp/food/">Read an in depth
-    description of each entre&eacute; option</a> for more details.
+    entre&eacute;s (descriptions below the form). Additionally, the caterer offers
+    a limited number of vegetarian or gluten free alternatives if needed.
 </p>
 
 <form method="post" action="{{ path }}">
@@ -38,4 +39,14 @@
         <input type="submit" value="Submit Reservation" />
     </section>
 </form>
+
+<div class="hr"></div>
+
+<p style="margin-bottom: 0px;">Entre&eacute; descriptions:</p>
+
+<ul>
+    <li><b>chicken</b>: roasted, free-range chicken, basted with lemon and rosemary</li>
+    <li><b>fish</b>: blackened mahi mahi, pineapple salsa, and grilled banana</li>
+    <li><b>steak</b>: New York strip steak with 1890 steak sauce</li>
+</ul>
 {% endblock %}

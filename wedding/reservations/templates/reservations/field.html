@@ -1,5 +1,5 @@
 {% if 'hidden' not in field.as_widget() %}
-    <li{% if field.css_classes() %} class=" {{ field.css_classes() }}"{% endif %}>
+    <li class="field{% if field.css_classes() %} {{ field.css_classes() }}{% endif %}">
         <label for="id_{{ field.html_name }}">{{ field.label }}</label>
         <div class="form-input">
             {{ field }}
