@@ -1,0 +1,38 @@
+#content form h1 {
+    clear: both;
+    font-style: italic;
+    font-weight: normal;
+    margin-top: 24px;
+}
+
+#content form > .invitee > ul {
+    list-style: none;
+    margin-left: 12px;
+}
+
+#content form > .invitee > ul > li {
+    clear: both;
+    margin-top: 8px
+}
+
+#content form > .invitee > ul > li > label {
+    font-weight: bold;
+}
+
+/* radio selects */
+#content .form-input > ul {
+    height: 24px;
+    list-style: none;
+    margin-left: 0px;
+    padding-left: 0px;
+}
+
+#content .form-input > ul > li {
+    float: left;
+    width: 125px;
+}
+
+#content .submit {
+    clear: both;
+    margin-top: 24px;
+}

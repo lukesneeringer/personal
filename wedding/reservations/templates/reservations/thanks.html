@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Reservations</h1>
+    
+    <p>Thank you for your reservation.
+    </p>
+    
+    {% if attending %}
+        <p>We are excited that you will be able to attend our wedding,
+            and look forward to seeing you in April.
+        </p>
+        
+        <p>If you need to modify your food order, or should your plans change
+            and you become unable to join us, you can come back and update your
+            reservation at any time before {{ deadline|format_date('F j') }}.
+        </p>
+    {% else %}
+        <p>It is unfortunate that you will be unable to join us for our wedding,
+            and we will miss you. However, we look forward to spending time with
+            you at some other point in the future.
+        </p>
+        
+        <p>Should your plans change and you are able to join us after all, you
+            can come back and change your reservation at any time before
+            {{ deadline|format_date('F j') }}.
+        </p>
+    {% endif %}
+{% endblock %}

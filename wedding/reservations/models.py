@@ -95,6 +95,10 @@ class Invitee(models.Model):
     def __unicode__(self):
         return '%s %s %s' % (self.title, self.first_name, self.last_name)
         
+    def get_rsvp_form(self, post=None):
+        from wedding.reservations.forms import RSVPForm
+        return RSVPForm(post, instance=self.reservation, prefix=hash(unicode(self)))
+        
     @cached_property
     def reservation(self):
         try:
@@ -108,7 +112,10 @@ class RSVP(models.Model):
     and their food order."""
     
     invitee = models.OneToOneField(Invitee, related_name='rsvp')
-    accepts = models.BooleanField(default=False)
+    accepts = models.BooleanField(default=False, verbose_name='attending', choices=(
+        (True, 'Accepts'),
+        (False, 'Regrets'),
+    ))
     food = models.CharField(max_length=16, choices=(
         ('chicken', 'Chicken'),
         ('fish', 'Fish'),

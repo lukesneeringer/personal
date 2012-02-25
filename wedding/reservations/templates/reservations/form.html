@@ -2,6 +2,10 @@
 
 {% block title %}RSVP{% endblock %}
 
+{% block media %}
+    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/rsvp_form.css" />
+{% endblock %}
+
 {% block content %}
 <h1>Reservations</h1>
 
@@ -20,14 +24,18 @@
     # iterate over each invitee and provide a separate
     # form object for each
     {% for invitee, form in forms %}
-    <h3>{{ invitee }}</h3>
-    <ul>
-        {{ form.as_ul() }}
-    </ul>
+    <section class="invitee" data-age="{{ invitee.age_group }}">
+        <h1>{{ invitee }}</h1>
+        <ul>
+            {% for field in form %}
+                {% include "reservations/field.html" %}
+            {% endfor %}
+        </ul>
+    </section>
     {% endfor %}
     
-    <div class="submit">
+    <section class="submit">
         <input type="submit" value="Submit Reservation" />
-    </div>
+    </section>
 </form>
 {% endblock %}
