@@ -80,6 +80,10 @@ nav a.selected {
     text-align: center;
 }
 
+#content > h2 {
+    margin-top: 24px;
+}
+
 #content p {
     line-height: 200%;
     margin-top: 12px;
@@ -133,4 +137,76 @@ footer {
     position: fixed;
     text-align: right;
     width: 960px;
+}
+
+/* forms */
+#content form h1 {
+    clear: both;
+    font-style: italic;
+    font-weight: normal;
+    margin-top: 24px;
+}
+
+#content form > ul, #content form > section > ul {
+    list-style: none;
+    margin-left: 12px;
+}
+
+#content form > ul > li, #content form > section > ul > li {
+    clear: both;
+    margin-top: 24px
+}
+
+#content form > ul > li > label, #content form > section > ul > li > label {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+/* radio selects */
+#content .form-input > ul {
+    height: 24px;
+    list-style: none;
+    margin-left: 0px;
+}
+
+#content .form-input > ul > li {
+    float: left;
+    padding-left: 4px;
+    width: 124px;
+}
+
+/* other form elements */
+#content .form-input input[type="text"], #content .form-input input[type="password"] {
+    font-size: 20px;
+}
+
+/* form help text */
+.help-text {
+    font-size: 13px;
+    font-style: italic;
+}
+
+/* form errors */
+#content ul.errorlist {
+    color: red;
+    font-weight: bold;
+    list-style: none;
+    margin-left: 0px;
+}
+
+#content .submit {
+    clear: both;
+    margin-top: 24px;
+}
+
+/* horiztonal rule */
+#content .hr {
+    background-color: black;
+    color: black;
+    height: 1px;
+    margin-top: 24px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0px;
+    width: 80%;
 }

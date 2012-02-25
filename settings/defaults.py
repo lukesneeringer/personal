@@ -21,6 +21,9 @@ DATABASES = {
     }
 }
 
+# login settings
+LOGIN_REDIRECT_URL = '/rsvp/'
+
 # rsvp deadline
 RSVP_DEADLINE = date(2012, 3, 23)
 
@@ -136,6 +139,7 @@ INSTALLED_APPS = (
     'django.contrib.admindocs',
     
     # wedding app
+    'wedding.accounts',
     'wedding.reservations',
     'wedding.static',
 )

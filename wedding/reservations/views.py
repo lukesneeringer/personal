@@ -61,12 +61,7 @@ def rsvp_thanks(request):
     # retrieve the invitation
     invitation = Invitation.objects.get(user=request.user)
     
-    # make sure my "thank you" message is appropriate -- is anyone
-    # on this invitation attending the wedding?
-    attending = reduce(lambda x, y: x | y, [i.reservation.accepts for i in invitation.invitee_set.all()])
-    
     # return the template
     return TemplateResponse(request, 'reservations/thanks.html', {
-        'attending': attending,
         'invitation': invitation,
     })

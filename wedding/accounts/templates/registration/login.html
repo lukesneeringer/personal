@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Login</h1>
+
+<p>In order to use this system, we need to know who you are.</p>
+
+<form method="post" action="{{ path }}">
+    <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}" />
+    <input type="hidden" name="next" value="{{ next }}" />
+    
+    <ul>
+        {% for field in form %}
+            {% include "misc/field.html" %}
+        {% endfor %}
+        
+        <li class="submit">
+            <input type="submit" value="Login" />
+        </li>
+    </ul>
+</form>
+
+<div class="hr"></div>
+
+<p>If this is your first time here, you can <a href="{{ url('register') }}">register</a> using the
+    code provided on the response card that came with your invitation.
+</p>
+{% endblock %}

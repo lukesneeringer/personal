@@ -59,7 +59,7 @@ class Invitation(models.Model):
         return self.invitee_set.filter(age_group='infants')
         
     @cached_property
-    def response(self):
+    def attending(self):
         """Return True if anyone on this invitation is attending,
         False if nobody is attending.
         If we have not yet received a response, return None.

@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Account Registration</h1>
+
+    <form method="post" action="{{ path }}">
+        <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}" />
+        <ul>
+            {% for field in form %}
+                {% include "misc/field.html" %}
+            {% endfor %}
+            <li class="submit">
+                <input type="submit" value="Register" />
+            </li>
+        </ul>
+    </form>
+{% endblock %}

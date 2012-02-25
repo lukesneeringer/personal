@@ -5,7 +5,7 @@
             {{ field }}
         </div>
         {% if field.errors %}{{ field.errors }}{% endif %}
-        {% if field.help_text %}{{ field.help_text }}{% endif %}
+        {% if field.help_text %}<div class="help-text">{{ field.help_text }}</div>{% endif %}
     </li>
 {% else %}
     {{ field }}
