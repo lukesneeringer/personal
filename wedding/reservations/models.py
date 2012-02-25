@@ -1,3 +1,4 @@
+# encoding: utf-8
 from django.contrib.auth.models import User
 from django.db import models
 from tools.decorators import cached_property
@@ -57,8 +58,16 @@ class Invitation(models.Model):
         return self.invitee_set.filter(age_group='infants')
         
     @cached_property
-    def rsvps(self):
-        return RSVP.objects.filter(invitee__invitation=self)
+    def response(self):
+        """Return True if anyone on this invitation is attending,
+        False if nobody is attending.
+        If we have not yet received a response, return None.
+        """
+        
+        rsvps = RSVP.objects.filter(invitee__invitation=self)
+        if len(rsvps) == 0:
+            return None
+        return reduce(lambda x, y: x | y, [i.accepts for i in rsvps])
         
     
 class Invitee(models.Model):
@@ -81,10 +90,17 @@ class Invitee(models.Model):
     modified = models.DateTimeField(auto_now=True)
     
     class Meta:
-        ordering = ('age_group', 'sex', 'first_name')
+        ordering = ('age_group', '-sex', 'last_name', 'first_name')
     
     def __unicode__(self):
         return '%s %s %s' % (self.title, self.first_name, self.last_name)
+        
+    @cached_property
+    def reservation(self):
+        try:
+            return self.rsvp
+        except RSVP.DoesNotExist:
+            return RSVP(invitee=self)
     
 
 class RSVP(models.Model):
@@ -92,14 +108,14 @@ class RSVP(models.Model):
     and their food order."""
     
     invitee = models.OneToOneField(Invitee, related_name='rsvp')
-    accepts = models.BooleanField(default=True)
+    accepts = models.BooleanField(default=False)
     food = models.CharField(max_length=16, choices=(
         ('chicken', 'Chicken'),
         ('fish', 'Fish'),
         ('steak', 'Steak'),
         ('vegetarian', 'Vegetarian'),
         ('gluten-free', 'Gluten Free'),
-    ), null=True, blank=True)
+    ), null=True, blank=True, verbose_name='entreé')
     medium = models.CharField(max_length=10, choices=(
         ('mail', 'Mail'),
         ('online', 'Online'),
@@ -109,7 +125,7 @@ class RSVP(models.Model):
     
     class Meta:
         verbose_name = 'RSVP'
-    
+        
     def __unicode__(self):
         return u'RSVP: %s' % self.invitee
     

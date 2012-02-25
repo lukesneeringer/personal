@@ -104,9 +104,12 @@ nav a.selected {
     text-align: center;
 }
 
+#content > ul {
+    margin-top: 12px;
+}
+
 #content ul {
     margin-left: 40px;
-    margin-top: 12px;
 }
 
 #content ul li {

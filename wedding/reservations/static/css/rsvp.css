@@ -1,0 +1,7 @@
+li.invitee:first-child {
+    margin-top: 0px;
+}
+
+li.invitee {
+    margin-top: 8px;
+}

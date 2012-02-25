@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block media %}
+    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/rsvp.css" />
+{% endblock %}
+
+{% block content %}
+    <h1>Reservations</h1>
+    
+    {% if invitation.response is not none %}
+        <p>Thank you for responding; we have your RSVP on file, 
+            {% if invitation.response %}and we're very glad that you will{% else -%}
+            although we're sad that you will not{% endif %} be able to join us.
+        </p>
+        
+        <p>Your current reservation is:</p>
+        
+        <ul>
+        {% for invitee in invitation.invitee_set.order_by('age_group', '-sex') %}
+            <li class="invitee">{{ invitee }}{% if invitee.age_group != 'adult' %} <i>({{ invitee.age_group }})</i>{% endif %}</li>
+            <ul>
+                <li>Attending: <b>{% if invitee.reservation.accepts %}Yes{% else %}No{% endif %}</b></li>
+                {% if invitee.reservation.accepts and invitee.age_group != 'infant' %}
+                <li>Entr&eacute;e: <b>{{ invitee.reservation.get_food_display() }}</b></li>
+                {% endif %}
+            </ul>
+        {% endfor %}
+        </ul>
+        
+        {% if date.today() <= deadline %}
+            <p>If there's anything about your reservation that needs an update, you can
+                <a href="{{ url('rsvp-form') }}">update your reservation</a> at any time up
+                until {{ deadline|format_date('F j, Y') }}.
+            </p>
+        {% else %}
+            <p>For logistical reasons, we can no longer accept alterations to reservations
+                as of {{ deadline|format_date('F j, Y') }}. However, if you have an issue
+                with your reservation, please <a href="mailto:lukesneeringer@gmail.com">e-mail
+                Luke</a> and we'll see what we can do.
+            </p>
+        {% endif %}
+    {% else %}
+        {% if date.today () <= deadline %}
+            <p>Thank you for considering joining us for our wedding; we would
+                be excited to have you. Currently you have not yet sent an RSVP,
+                or if you mailed it to us, we haven't received it yet.
+            </p>
+            
+            <p>The favor of a reply is requested by <b>{{ deadline|format_date('F j, Y') }}</b>.
+                If you wish, you may <a href="{{ url('rsvp-form') }}">RSVP online now</a>. You can
+                always change your reservation until {{ deadline|format_date('F j') }}.
+            </p> 
+        {% else %}
+            <p>We're sorry.</p>
+        
+            <p>Unfortunately, we have already passed the deadline for making a
+                reservation ({{ deadline|format_date('F j, Y') }}). We cannot take additional
+                RSVPs at this point for logistical reasons.
+            </p>
+        {% endif %}
+    {% endif %}
+{% endblock %}

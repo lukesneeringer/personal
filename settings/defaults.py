@@ -1,3 +1,5 @@
+from datetime import date
+
 # Django settings for sneeringer project.
 DEBUG = False
 TEMPLATE_DEBUG = DEBUG
@@ -18,6 +20,9 @@ DATABASES = {
         'PORT': '',                                          # Set to empty string for default. Not used with sqlite3.
     }
 }
+
+# rsvp deadline
+RSVP_DEADLINE = date(2012, 3, 23)
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name

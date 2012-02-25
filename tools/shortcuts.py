@@ -2,6 +2,7 @@ from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.http import HttpResponse
 from django.template.context import get_standard_processors
+from django.template.defaultfilters import date, yesno, timesince, timeuntil
 from django.template.response import TemplateResponse
 import jinja2
 
@@ -27,6 +28,12 @@ jinja_env = jinja2.Environment(
 # add django.core.urlresolvers.reverse as a global "url()" function
 # that I can use in lieu of the {% url %} tag in django
 jinja_env.globals['url'] = reverse
+
+# add some of the filters from the Django core system that I like...
+jinja_env.filters['format_date'] = date
+jinja_env.filters['timesince'] = timesince
+jinja_env.filters['timeuntil'] = timeuntil
+jinja_env.filters['yesno'] = yesno
 
 
 def template(request, filename, context={}, mimetype=None):

@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}RSVP{% endblock %}
+
+{% block content %}
+<h1>Reservations</h1>
+
+<p>Simply fill out and submit the form below to set your reservation.</p>
+
+<p>We will be serving a full meal (at no cost to our guests, of course) at the
+    reception, around 2:00 PM. We are offering chicken, fish, and steak
+    entre&eacute;s. Additionally, the caterer offers a limited number of vegetarian
+    or gluten free alternatives if needed. <a href="/rsvp/food/">Read an in depth
+    description of each entre&eacute; option</a> for more details.
+</p>
+
+<form method="post" action="{{ path }}">
+    <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}" />
+    
+    # iterate over each invitee and provide a separate
+    # form object for each
+    {% for invitee, form in forms %}
+    <h3>{{ invitee }}</h3>
+    <ul>
+        {{ form.as_ul() }}
+    </ul>
+    {% endfor %}
+    
+    <div class="submit">
+        <input type="submit" value="Submit Reservation" />
+    </div>
+</form>
+{% endblock %}

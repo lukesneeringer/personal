@@ -1,3 +1,5 @@
+from datetime import date, datetime
+from django.conf import settings
 from django.core.urlresolvers import reverse
 
 def data(request):
@@ -34,5 +36,9 @@ def data(request):
     
     # done!
     return {
+        'date': date,
+        'datetime': datetime,
+        'deadline': settings.RSVP_DEADLINE,
         'nav': nav,
+        'path': request.path,
     }
