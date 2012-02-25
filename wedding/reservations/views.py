@@ -1,7 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseRedirect
-from tools.shortcuts import template
+from django.template.response import TemplateResponse
 from wedding.reservations.models import *
 
 
@@ -13,7 +13,7 @@ def index(request):
     invitation = Invitation.objects.get(user=request.user)
     
     # send down a template with reservation details
-    return template(request, 'reservations/index.html', {
+    return TemplateResponse(request, 'reservations/index.html', {
         'invitation': invitation,
     })
     
@@ -48,7 +48,7 @@ def rsvp_form(request):
             forms.append((invitee, invitee.get_rsvp_form()))
         
     # send back the form
-    return template(request, 'reservations/form.html', {
+    return TemplateResponse(request, 'reservations/form.html', {
         'invitation': invitation,
         'forms': forms,
     })
@@ -66,7 +66,7 @@ def rsvp_thanks(request):
     attending = reduce(lambda x, y: x | y, [i.reservation.accepts for i in invitation.invitee_set.all()])
     
     # return the template
-    return template(request, 'reservations/thanks.html', {
+    return TemplateResponse(request, 'reservations/thanks.html', {
         'attending': attending,
         'invitation': invitation,
     })

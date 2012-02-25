@@ -8,6 +8,7 @@ class Invitation(models.Model):
     """A single invitation sent to a family at a given address."""
     
     user = models.ForeignKey(User, null=True, blank=True)
+    token = models.CharField(max_length=8)
     address = models.CharField(max_length=100)
     city = models.CharField(max_length=30)
     state = models.CharField(max_length=2)
@@ -152,3 +153,6 @@ class Gift(models.Model):
     
     def __unicode__(self):
         return self.label
+        
+        
+from wedding.reservations.signals import *

@@ -4,6 +4,7 @@ from django.http import HttpResponse
 from django.template.context import get_standard_processors
 from django.template.defaultfilters import date, yesno, timesince, timeuntil
 from django.template.response import TemplateResponse
+from django import template
 import jinja2
 
 
@@ -36,18 +37,31 @@ jinja_env.filters['timeuntil'] = timeuntil
 jinja_env.filters['yesno'] = yesno
 
 
-def template(request, filename, context={}, mimetype=None):
-    """Return back an HttpResponse using the requested template.
-    Do any feedmagnet-specific stuff that I want done foor every page before rendering"""
-                    
-    # I still want to keep the use of my Django context processors
-    # even though this is a Jinja template; therefore, process them manually
-    for context_processor in get_standard_processors():
-        new_stuff = context_processor(request)
-        if new_stuff:
-            context.update(dict(new_stuff))
-            
-    # retrieve the appropriate template
-    jinja_template = jinja_env.get_template(filename)
-    response_text = jinja_template.render(context)
-    return HttpResponse(response_text, mimetype=mimetype)
+class JinjaTemplateResponse(TemplateResponse):
+    def resolve_context(self, context):
+        if context:
+            context = dict(context)
+        else:
+            context = {}
+        
+        # I still want to keep the use of my Django context processors
+        # even though this is a Jinja template; therefore, process them manually
+        for context_processor in get_standard_processors():
+            new_stuff = context_processor(self._request)
+            if new_stuff:
+                context.update(dict(new_stuff))
+    
+        # return a flat dict; jinja doesn't have context objects
+        return context
+    
+    def resolve_template(self, template):
+        """Takes a template and tries to return back the appropriate
+        Jinja template object.
+        If an explicit Django template object is passed, do nothing."""
+        
+        if isinstance(template, basestring):
+            return jinja_env.get_template(template)
+        elif isinstance(template, (list, tuple)):
+            return jinja_env.select_template(template)
+        else:
+            return template

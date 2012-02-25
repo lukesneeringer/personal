@@ -23,7 +23,10 @@
 		</div>
 		<footer>
     		{% if not user.is_anonymous() %}
-		        logged in as <b>{{ user.username }}</b>: {% if user.is_superuser %}<a href="/admin/">admin</a> | {% endif %}<a href="">change password</a> | <a href="/logout/">logout</a>
+		        logged in as <b>{{ user.username }}</b>:
+		        {% if user.is_superuser %}<a href="/admin/">admin</a> | {% endif %}
+		        <a href="{{ url('password-change') }}">change password</a> |
+		        <a href="{{ url('logout') }}">logout</a>
     		{% endif %}
 	    </footer>
 	</body>

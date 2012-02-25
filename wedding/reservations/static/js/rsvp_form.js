@@ -59,7 +59,7 @@
             // add a "special" link for those with vegetarian / gluten free needs
             var $special = $('<span class="special">(specialty meals also available)</span>').insertBefore($special_options.eq(0))
             $special.click(function() {
-                $special_options.show('normal')
+                $special_options.fadeIn('normal')
                 $special.remove()
             })
         })
