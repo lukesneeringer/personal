@@ -9,14 +9,10 @@ from wedding.reservations.models import *
 def index(request):
     """Return the RSVP landing page."""
     
-    # pull up the invitation attached to this user
-    invitation = Invitation.objects.get(user=request.user)
-    
     # send down a template with reservation details
     return TemplateResponse(request, 'reservations/index.html', {
-        'invitation': invitation,
+        'invitation': request.user.invitation,
     })
-    
     
 @login_required
 def rsvp_form(request):
@@ -24,7 +20,7 @@ def rsvp_form(request):
     
     # first, pull up the invitation and the reservation (if any)
     # for this user
-    invitation = Invitation.objects.get(user=request.user)
+    invitation = request.user.invitation
     
     # okay, am I processing the form?
     forms = []
@@ -59,7 +55,7 @@ def rsvp_thanks(request):
     """Landing page for a successful RSVP."""
     
     # retrieve the invitation
-    invitation = Invitation.objects.get(user=request.user)
+    invitation = request.user.invitation
     
     # return the template
     return TemplateResponse(request, 'reservations/thanks.html', {

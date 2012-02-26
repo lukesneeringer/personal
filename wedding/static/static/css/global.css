@@ -131,9 +131,10 @@ nav a.selected {
 /* footer */
 footer {
     top: 4px;
-    color: #808080;
-    font-family: Tahoma, Arial, Sans-Serif;
+    color: #606060;
+    font-family: Georgia, Times, Serif;
     font-size: 10px;
+    font-style: italic;
     position: fixed;
     text-align: right;
     width: 960px;

@@ -7,8 +7,8 @@ from tools.decorators import cached_property
 class Invitation(models.Model):
     """A single invitation sent to a family at a given address."""
     
-    user = models.ForeignKey(User, null=True, blank=True)
-    token = models.CharField(max_length=8)
+    user = models.OneToOneField(User, null=True, blank=True)
+    token = models.CharField(max_length=8, blank=True)
     address = models.CharField(max_length=100)
     city = models.CharField(max_length=30)
     state = models.CharField(max_length=2)
@@ -18,8 +18,18 @@ class Invitation(models.Model):
     modified = models.DateTimeField(auto_now=True)
     
     def __unicode__(self):
+        return self.formal_name
+        
+    def __len__(self):
+        return self.invitee_set.count()
+        
+    def __nonzero__(self):
+        return True
+        
+    @cached_property
+    def formal_name(self):
         """Return the formal name used to address this invitation."""
-
+        
         # if there is only one adult, use the adult's formal name
         if len(self.adults) == 1:
             return unicode(self.adults[0])
@@ -37,14 +47,37 @@ class Invitation(models.Model):
             
         # okay, the last names don't match; print the names out separately
         # and in their entirety
-        # (e.g. "Mr. Daniel Beltz and Ms. Jessica Dymer")
+        # (e.g. "Mr. Daniel Beltz and Miss Jessica Dymer")
         return u'%s & %s' % (self.adults[0], self.adults[1])
         
-    def __len__(self):
-        return self.invitee_set.count()
+    @cached_property
+    def informal_name(self):
+        """Return a less formal version of the names of the adults
+        on this invitation."""
         
-    def __nonzero__(self):
-        return True
+        # if there is only one adult, use the adult's first and last name
+        if len(self.adults) == 1:
+            return u'%s %s' % (self.adults[0].first_name, self.adults[0].last_name)
+            
+        # okay, there are two adults -- if their last names match,
+        # then return a single format with both informal first names but the shared
+        # last name (e.g. "Jon and Andi Chappell")
+        if self.adults[0].last_name == self.adults[1].last_name:
+            return u'%(male_first_name)s & %(female_first_name)s %(last_name)s' % {
+                'female_first_name': self.adults[1].nickname,
+                'male_first_name': self.adults[0].nickname,
+                'last_name': self.adults[0].last_name,
+            }
+            
+        # okay, there are two adults with different last names; print
+        # them out separately but with no titles
+        # (e.g. "Dan Beltz & Jess Dymer")
+        return u'%(male_first_name)s %(male_last_name)s & %(female_first_name)s %(female_last_name)s' % {
+            'female_first_name': self.adults[1].nickname,
+            'female_last_name': self.adults[1].last_name,
+            'male_first_name': self.adults[0].nickname,
+            'male_last_name': self.adults[0].last_name,
+        }    
     
     @cached_property
     def adults(self):
@@ -78,6 +111,7 @@ class Invitee(models.Model):
     title = models.CharField(max_length=16)
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
+    nickname = models.CharField(max_length=16, blank=True, help_text='An informal or short name, if the person uses one (e.g. "Elli", "Jon").')
     age_group = models.CharField(max_length=6, choices=(
         ('adult', 'Adult'),
         ('child', 'Child (2 - 16 years)'),

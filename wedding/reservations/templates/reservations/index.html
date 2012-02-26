@@ -7,9 +7,9 @@
 {% block content %}
     <h1>Reservations</h1>
     
-    {% if invitation.response is not none %}
+    {% if invitation.attending is not none %}
         <p>Thank you for responding; we have your RSVP on file, 
-            {% if invitation.response %}and we're very glad that you will{% else -%}
+            {% if invitation.attending %}and we're very glad that you will{% else -%}
             although we're sad that you will not{% endif %} be able to join us.
         </p>
         
