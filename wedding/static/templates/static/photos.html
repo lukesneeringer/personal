@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block media %}
+    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/photos.css" />
+{% endblock %}
+
+{% block content %}
+    <h1>Photos</h1>
+    
+    <div class="landscape">
+        {% for i in range(0, 6) %}
+        <a href="{{ url('photo', kwargs={ 'id': i, 'orientation': 'landscape' }) }}">
+            <img src="{{ STATIC_URL }}img/thumbnails/landscape{{ i }}.jpg" />
+        </a>
+        {% endfor %}
+    </div>
+    
+    <div class="portrait">
+        {% for i in range(0, 8) %}
+        <a href="{{ url('photo', kwargs={ 'id': i, 'orientation': 'portrait' }) }}">
+            <img src="{{ STATIC_URL }}img/thumbnails/portrait{{ i }}.jpg" />
+        </a>
+        {% endfor %}
+    </div>
+{% endblock %}

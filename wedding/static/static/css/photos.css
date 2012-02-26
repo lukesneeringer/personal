@@ -1,0 +1,27 @@
+#content img {
+    border: 1px solid black;
+    box-shadow: 3px 3px 2px #808080;
+}
+
+.landscape {
+    padding-top: 40px;
+}
+
+.landscape a {
+    display: block;
+    float: left;
+    margin-bottom: 40px;
+    width: 240px;
+}
+
+.portrait {
+    clear: both;
+}
+
+.portrait a {
+    display: block;
+    float: left;
+    margin-bottom: 40px;
+    width: 180px;
+}
+

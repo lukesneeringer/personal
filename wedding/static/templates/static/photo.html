@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block media %}
+    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/photo.css" />
+{% endblock %}
+
+{% block content %}
+    <h1>Photos</h1>
+    
+    <p><a href="{{ url('info', kwargs={ 'template_name': 'photos' }) }}">&laquo; Back to Thumbnail Gallery</a></p>
+
+    <div class="single-photo">
+        <img class="{{ orientation }}" src="{{ STATIC_URL }}img/photos/{{ filename }}" />
+    </div>
+{% endblock %}

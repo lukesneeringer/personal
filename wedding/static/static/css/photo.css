@@ -1,0 +1,16 @@
+#content .single-photo {
+    text-align: center;
+}
+
+#content img {
+    border: 2px solid black;
+    box-shadow: 5px 5px 3px #808080;
+}
+
+#content img.landscape {
+    width: 640px;
+}
+
+#content img.portrait {
+    width: 480px;
+}

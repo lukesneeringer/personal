@@ -7,7 +7,5 @@ urlpatterns = patterns('wedding.accounts.views',
     # authentication management
     url(r'^login/$', views.login, name='login'),
     url(r'^logout/$', views.logout, { 'next_page': '/' }, name='logout'),
-    url(r'^password-change/$', views.password_change, name='password-change'),
-    url(r'^password-change-done/$', views.password_change_done),
     url(r'^register/$', 'register', name='register'),
 )

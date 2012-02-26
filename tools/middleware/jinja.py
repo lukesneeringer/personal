@@ -29,6 +29,7 @@ jinja_env = jinja2.Environment(
 # add django.core.urlresolvers.reverse as a global "url()" function
 # that I can use in lieu of the {% url %} tag in django
 jinja_env.globals['url'] = reverse
+jinja_env.globals['range'] = xrange
 
 # add some of the filters from the Django core system that I like...
 jinja_env.filters['format_date'] = date

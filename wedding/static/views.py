@@ -12,3 +12,15 @@ def info(request, template_name):
         'area': template_name
     })
     
+def photo(request, orientation, id):
+    """Display a specific photo."""
+    
+    # what is the filename for the photo that has been clicked on?
+    filename = '%s%d.jpg' % (orientation, int(id))
+    
+    # return back the template
+    return TemplateResponse(request, 'static/photo.html', {
+        'area': 'photos',
+        'filename': filename,
+        'orientation': orientation,
+    })
