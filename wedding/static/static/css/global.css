@@ -78,7 +78,7 @@ nav a img {
     margin-top: 16px;
     margin-left: 220px;
     position: relative;
-    width: 740px;
+    width: 720px;
 }
 
 #content > h1 {
@@ -146,7 +146,7 @@ footer {
     font-style: italic;
     position: fixed;
     text-align: right;
-    width: 960px;
+    width: 920px;
 }
 
 /* forms */
