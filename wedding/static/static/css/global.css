@@ -17,9 +17,13 @@ body {
     background-position: center 0px;
     background-repeat: no-repeat;
     font-family: Arial;
+    padding: 0px;
+    position: relative;
+}
+
+#enclosure {
     margin-left: auto;
     margin-right: auto;
-    padding: 0px;
     position: relative;
     width: 980px;
 }
@@ -39,6 +43,7 @@ nav a:first-child {
 }
 
 nav a {
+    border: 0px;
     color: #606060;
     display: block;
     font-family: Georgia;
@@ -60,6 +65,10 @@ nav a.selected {
     background-image: url('/static/img/nav-selected.png');
     background-repeat: repeat-y;
     color: black;
+}
+
+nav a img {
+    border: 0px;
 }
 
 /* content box */
