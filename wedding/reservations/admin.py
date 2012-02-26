@@ -9,7 +9,7 @@ class InviteeInline(admin.TabularInline):
 
 @admin_register(Invitation)
 class InvitationAdmin(admin.ModelAdmin):
-    list_display = ('__unicode__', 'token', 'address', 'city', 'state', 'zip_code')
+    list_display = ('__unicode__', 'token', 'address', 'city', 'state', 'zip_code', 'rehearsal_dinner')
     exclude = ('token',)
     inlines = (InviteeInline,)
     
