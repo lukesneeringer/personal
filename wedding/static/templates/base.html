@@ -3,6 +3,11 @@
 	<head>
 		<title>{% if title %}{{ title }} - {% endif %}Luke &amp; Meagan</title>
 		<link rel="stylesheet" href="{{ STATIC_URL }}css/global.css" />
+		
+		# make HTML 5 work in all browsers
+		<!--[if lt IE 9]><script src="https://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]--> 
+        
+        # custom media
 		{% block media %}
 		{% endblock %}
 	</head>
