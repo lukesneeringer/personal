@@ -27,7 +27,7 @@
             "state": "TX", 
             "user": 1, 
             "address": "12112 Tanglebriar Trl", 
-            "rehearsal_dinner": false, 
+            "rehearsal_dinner": true, 
             "zip_code": "78750"
         }
     }, 
