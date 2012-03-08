@@ -2,10 +2,13 @@
 from django.contrib.auth.models import User
 from django.db import models
 from tools.decorators import cached_property
+from wedding.reservations import managers
 
 
 class Invitation(models.Model):
     """A single invitation sent to a family at a given address."""
+    
+    objects = managers.InvitationManager()
     
     user = models.OneToOneField(User, null=True, blank=True)
     token = models.CharField(max_length=8, blank=True)
@@ -25,6 +28,12 @@ class Invitation(models.Model):
         
     def __nonzero__(self):
         return True
+        
+    @cached_property
+    def primary_last_name(self):
+        """Return the primary last name for this invitation. Used
+        for ordering within the admin."""
+        return self.adults[0].last_name
         
     @cached_property
     def formal_name(self):
@@ -81,15 +90,15 @@ class Invitation(models.Model):
     
     @cached_property
     def adults(self):
-        return self.invitee_set.filter(age_group='adult').order_by('-sex')
+        return self.invitee_set.order_by('-sex', 'last_name', 'first_name').filter(age_group='adult').order_by('-sex')
         
     @cached_property
     def children(self):
-        return self.invitee_set.filter(age_group='children')
+        return self.invitee_set.order_by('last_name', 'first_name').filter(age_group='children')
         
     @cached_property
     def infants(self):
-        return self.invitee_set.filter(age_group='infants')
+        return self.invitee_set.order_by('last_name', 'first_name').filter(age_group='infants')
         
     @cached_property
     def attending(self):
@@ -125,7 +134,8 @@ class Invitee(models.Model):
     modified = models.DateTimeField(auto_now=True)
     
     class Meta:
-        ordering = ('age_group', '-sex', 'last_name', 'first_name')
+        ordering = ('last_name', 'first_name')
+        
     
     def __unicode__(self):
         return '%s %s %s' % (self.title, self.first_name, self.last_name)
@@ -135,7 +145,6 @@ class Invitee(models.Model):
         if self.age_group == 'infant':
             return InfantRSVPForm(post, instance=self.reservation, prefix=hash(unicode(self)))
         return RSVPForm(post, instance=self.reservation, prefix=hash(unicode(self)))
-        
         
     @cached_property
     def reservation(self):
@@ -169,6 +178,7 @@ class RSVP(models.Model):
     modified = models.DateTimeField(auto_now=True)
     
     class Meta:
+        ordering = ('invitee',)
         verbose_name = 'RSVP'
         
     def __unicode__(self):

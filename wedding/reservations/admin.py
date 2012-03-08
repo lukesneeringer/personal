@@ -12,6 +12,7 @@ class InvitationAdmin(admin.ModelAdmin):
     list_display = ('__unicode__', 'token', 'address', 'city', 'state', 'zip_code', 'rehearsal_dinner')
     exclude = ('token', 'user')
     inlines = (InviteeInline,)
+    ordering = ('invitee__last_name',)
     
     
 @admin_register(Gift)
@@ -22,3 +23,4 @@ class GiftAdmin(admin.ModelAdmin):
 @admin_register(RSVP)
 class RSVPAdmin(admin.ModelAdmin):
     list_display = ('invitee', 'accepts', 'food', 'medium', 'modified')
+    list_filter = ('accepts', 'food')
