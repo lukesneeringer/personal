@@ -90,15 +90,19 @@ class Invitation(models.Model):
     
     @cached_property
     def adults(self):
-        return self.invitee_set.order_by('-sex', 'last_name', 'first_name').filter(age_group='adult').order_by('-sex')
+        return self.invitee_set.order_by('-sex', 'last_name', 'first_name').filter(age_group='adult')
+        
+    @cached_property
+    def youths(self):
+        return self.invitee_set.order_by('last_name', 'first_name').filter(age_group='adult_')
         
     @cached_property
     def children(self):
-        return self.invitee_set.order_by('last_name', 'first_name').filter(age_group='children')
+        return self.invitee_set.order_by('last_name', 'first_name').filter(age_group='child')
         
     @cached_property
     def infants(self):
-        return self.invitee_set.order_by('last_name', 'first_name').filter(age_group='infants')
+        return self.invitee_set.order_by('last_name', 'first_name').filter(age_group__in=('free', 'infants'))
         
     @cached_property
     def attending(self):
@@ -121,11 +125,19 @@ class Invitee(models.Model):
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
     nickname = models.CharField(max_length=16, blank=True, help_text='An informal or short name, if the person uses one (e.g. "Elli", "Jon").')
-    age_group = models.CharField(max_length=6, choices=(
-        ('adult', 'Adult'),
-        ('child', 'Child (2 - 16 years)'),
-        ('infant', 'Infant (0 - 23 months)'),
-    ), default='adult', db_index=True)
+    age_group = models.CharField(
+        choices=(
+            ('adult', 'Adult (10+) - Primary Addressee'),
+            ('adult_', 'Adult (10+) - Not Primary Addressee'),
+            ('child', 'Child (5 - 10 years)'),
+            ('free', 'Small Child (2 - 5 years)'),
+            ('infant', 'Infant (0 - 23 months)'),
+        ),
+        default='adult',
+        db_index=True,
+        help_text='The age group of the invitee. This affects how the invitation is "named", as only adults are primary names on the invitation, as well as pricing information sent to the venue. Note: Each invitation must have exactly one or two primary residents; not zero, not 3+.',
+        max_length=6,
+    )
     sex = models.CharField(max_length=6, choices=(
         ('male', 'Male'),
         ('female', 'Female'),
@@ -135,7 +147,6 @@ class Invitee(models.Model):
     
     class Meta:
         ordering = ('last_name', 'first_name')
-        
     
     def __unicode__(self):
         return '%s %s %s' % (self.title, self.first_name, self.last_name)
