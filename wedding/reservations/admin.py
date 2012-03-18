@@ -23,4 +23,4 @@ class GiftAdmin(admin.ModelAdmin):
 @admin_register(RSVP)
 class RSVPAdmin(admin.ModelAdmin):
     list_display = ('invitee', 'accepts', 'food', 'medium', 'modified')
-    list_filter = ('accepts', 'food')
+    list_filter = ('accepts', 'food', 'age_group')
