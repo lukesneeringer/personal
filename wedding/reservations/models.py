@@ -20,6 +20,9 @@ class Invitation(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
     
+    class Meta:
+        ordering = ('invitee__last_name',)
+    
     def __unicode__(self):
         return self.formal_name
         
