@@ -188,6 +188,7 @@ class RSVP(models.Model):
         ('mail', 'Mail'),
         ('online', 'Online'),
         ('verbal', 'Verbal'),
+        ('assumption', 'Assumption'),
     ), help_text='The response medium this person used.', default='mail')
     created = models.DateTimeField(auto_now_add=True)
     modified = models.DateTimeField(auto_now=True)
