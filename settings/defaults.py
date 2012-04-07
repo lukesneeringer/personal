@@ -142,6 +142,7 @@ INSTALLED_APPS = (
     # wedding app
     'wedding.accounts',
     'wedding.reservations',
+    'wedding.seating',
     'wedding.static',
 )
 

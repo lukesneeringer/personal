@@ -172,6 +172,8 @@ class RSVP(models.Model):
     """A response from an individual on whether they will attend,
     and their food order."""
     
+    objects = managers.RSVPManager()
+    
     invitee = models.OneToOneField(Invitee, related_name='rsvp')
     accepts = models.BooleanField(default=True, verbose_name='attending', choices=(
         (True, 'Accepts'),
@@ -198,7 +200,7 @@ class RSVP(models.Model):
         verbose_name = 'RSVP'
         
     def __unicode__(self):
-        return u'RSVP: %s' % self.invitee
+        return unicode(self.invitee)
     
 
 class Gift(models.Model):
